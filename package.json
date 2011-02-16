@@ -1,0 +1,74 @@
+{
+  "name": "challenge-back",
+  "version": "1.0.0",
+  "description": "NodeJS backend with express, sequelize and mongoose",
+  "main": "index.js",
+  "type": "commonjs",
+  "scripts": {
+    "dev": "nodemon --inspect index.js",
+    "dev:docker": "nodemon -L --inspect index.js",
+    "prod": "cross-env NODE_ENV=production node --no-warnings index.js",
+    "prod:docker": "cross-env NODE_ENV=production node --no-warnings index.js",
+    "lint": "eslint --fix src/**/*.js --fix index.js",
+    "format": "prettier -w src/**/*.js -w index.js",
+    "migrate:up": "sequelize-cli db:migrate",
+    "migrate:down": "sequelize-cli db:migrate:undo",
+    "migrate:down:all": "sequelize-cli db:migrate:undo:all",
+    "migrate:create": "sequelize-cli migration:create",
+    "db:create": "sequelize-cli db:create",
+    "db:drop": "sequelize-cli db:drop",
+    "seed": "sequelize-cli db:seed:all",
+    "seed:one": "sequelize-cli db:seed",
+    "unseed": "sequelize-cli db:seed:undo:all",
+    "unseed:one": "sequelize-cli db:seed:undo",
+    "reload:db": "npm run db:drop && npm run db:create",
+    "reload:migrate": "npm run reload:db && npm run migrate:up",
+    "reload:all": "npm run db:drop && npm run db:create && npm run migrate:up && npm run seed",
+    "prepare": "husky install",
+    "test": "jest"
+  },
+  
+  "pre-commit": [
+    "lint",
+    "format"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.20.2",
+    "cls-hooked": "^4.2.2",
+    "compression": "^1.7.4",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "express-rate-limit": "^7.2.0",
+    "helmet": "^7.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "lodash": "^4.17.21",
+    "mongoose": "^8.3.3",
+    "pg": "^8.11.5",
+    "pg-hstore": "^2.3.4",
+    "sequelize": "^6.37.3"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.2.0",
+    "@faker-js/faker": "^8.4.1",
+    "cross-env": "^7.0.3",
+    "eslint": "^9.2.0",
+    "eslint-config-prettier": "^9.1.0",
+    "globals": "^15.1.0",
+    "husky": "^9.0.11",
+    "jest": "^29.7.0",
+    "lint-staged": "^15.2.2",
+    "morgan": "^1.10.0",
+    "nodemon": "^3.1.0",
+    "prettier": "^3.2.5",
+    "sequelize-cli": "^6.6.2"
+  },
+  
+  "lint-staged": {
+    "*.js": [
+      "eslint --cache --fix",
+      "prettier --write"
+    ]
+  }
+}
